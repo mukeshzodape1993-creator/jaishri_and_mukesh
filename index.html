@@ -1,0 +1,598 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="theme-color" content="#F4F6FA" />
+    <title>Mukesh &amp; Jaishri — Wedding Invitation</title>
+
+    <!-- Google Fonts: Cormorant Garamond, DM Sans, Anek Devanagari & Noto Serif Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* =====================================================================
+           1. DESIGN TOKENS — GRAND ROYAL NAVY, SILK IVORY & CHAMPAGNE GOLD
+           ===================================================================== */
+        :root {
+            --bg-mist: #F7F3EA;
+            --bg-mist-deep: #EDE5D5;
+            --bg-card: #FFFDFA;
+            --bg-ivory-cover: #FCF9F2;
+            --bg-ivory-fold: #F5EFE2;
+
+            --navy-deep: #12203E;
+            --navy-royal: #182848;
+            --navy-mid: #233A6B;
+            --navy-slate: #31446C;
+            --ink-muted: #5F6E8B;
+
+            --gold-antique: #B69156;
+            --gold-royal: #C9A255;
+            --gold-bronze: #8A6732;
+            --gold-champagne: #DFC080;
+            --gold-light: #F3E5C6;
+
+            --rose-muted: #A65660;
+            --border-mist: rgba(182, 145, 86, 0.34);
+            --border-gold: rgba(182, 145, 86, 0.62);
+            --shadow-card:
+                0 24px 52px -18px rgba(18, 32, 62, 0.16),
+                0 6px 18px -6px rgba(182, 145, 86, 0.14);
+
+            --font-display-en: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+            --font-body-en: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display-mr: 'Anek Devanagari', 'Kohinoor Devanagari', sans-serif;
+            --font-body-mr: "Noto Serif Devanagari", "Kohinoor Devanagari", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-mist);
+        }
+
+        body {
+            font-family: var(--font-body-en);
+            font-weight: 400;
+            color: var(--navy-deep);
+            background:
+                radial-gradient(circle at 50% 0%, rgba(235, 217, 178, 0.45) 0%, transparent 52%),
+                radial-gradient(circle at 10% 18%, rgba(214, 224, 245, 0.55) 0%, transparent 46%),
+                radial-gradient(circle at 90% 25%, rgba(235, 220, 188, 0.48) 0%, transparent 48%),
+                radial-gradient(circle at 50% 92%, rgba(218, 227, 246, 0.52) 0%, transparent 56%),
+                linear-gradient(180deg, #F8F4EC 0%, #EFE9DC 50%, #F7F3EA 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html[lang="mr"] body {
+            font-family: var(--font-body-mr);
+            font-weight: 400;
+        }
+
+        /* =====================================================================
+           1B. STATIC ARCHITECTURAL BACKGROUND LINES & CELESTIAL WATERMARKS
+           ===================================================================== */
+        #pageBackdropGeometry {
+            position: fixed;
+            inset: 0;
+            pointer-events: none !important;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        #pageBackdropGeometry svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .card-watermark-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none !important;
+            z-index: 0;
+        }
+
+        /* =====================================================================
+           2. NAME SPARKLE & FOUR-POINT STARLIGHT BURST EFFECTS
+           ===================================================================== */
+        .tap-sparkle,
+        .four-point-star {
+            position: fixed;
+            pointer-events: none !important;
+            z-index: 9998;
+            will-change: transform, opacity;
+        }
+
+        .tap-sparkle {
+            border-radius: 50%;
+            animation: sparklePop 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes sparklePop {
+            0% {
+                transform: translate3d(0, 0, 0) scale(0.35);
+                opacity: 1;
+            }
+            100% {
+                transform: translate3d(var(--sx, 0px), var(--sy, -36px), 0) scale(1.15);
+                opacity: 0;
+            }
+        }
+
+        .four-point-star {
+            animation: starGlintFloat 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes starGlintFloat {
+            0% {
+                transform: translate3d(0, 0, 0) scale(0.2) rotate(0deg);
+                opacity: 0;
+            }
+            28% {
+                opacity: 1;
+                transform: translate3d(calc(var(--sx, 0px) * 0.35), calc(var(--sy, -24px) * 0.35), 0) scale(1.1) rotate(45deg);
+            }
+            100% {
+                transform: translate3d(var(--sx, 0px), var(--sy, -36px), 0) scale(0.35) rotate(95deg);
+                opacity: 0;
+            }
+        }
+
+        /* =====================================================================
+           3. INTERACTIVE CHAMPAGNE-GOLD METALLIC SHIMMER ON COUPLE NAMES
+              (With full matra clearance for श, ु ukar & ी velanti)
+           ===================================================================== */
+        .shimmer-name-text {
+            display: inline-block;
+            background-image: linear-gradient(
+                112deg,
+                var(--navy-deep) 0%,
+                var(--navy-deep) 34%,
+                #9A7640 44%,
+                #E8CA8C 50%,
+                #9A7640 56%,
+                var(--navy-deep) 66%,
+                var(--navy-deep) 100%
+            );
+            background-size: 260% 100%;
+            background-position: var(--sheen-pos, 115%) 50%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            overflow: visible !important;
+            animation: nameGoldSheenSweep 5.6s ease-in-out infinite;
+            transition: filter 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: background-position, filter, transform;
+        }
+
+        .shimmer-name-text.is-mr-tone {
+            background-image: linear-gradient(
+                112deg,
+                var(--navy-royal) 0%,
+                var(--navy-royal) 34%,
+                #9A7640 44%,
+                #E8CA8C 50%,
+                #9A7640 56%,
+                var(--navy-royal) 66%,
+                var(--navy-royal) 100%
+            );
+            background-size: 260% 100%;
+            padding: 0.34em 0.35em 0.24em 0.25em;
+            line-height: 1.44;
+            overflow: visible !important;
+        }
+
+        @keyframes nameGoldSheenSweep {
+            0%, 24% {
+                background-position: 118% 50%;
+            }
+            68%, 100% {
+                background-position: -18% 50%;
+            }
+        }
+
+        .couple-names-stack.is-pointer-active .shimmer-name-text {
+            animation: none;
+            background-position: var(--pointer-sheen, 50%) 50%;
+            filter: drop-shadow(0 3px 12px rgba(182, 145, 86, 0.32));
+        }
+
+        .couple-names-stack.flash-shine .shimmer-name-text,
+        .pamphlet-inner-reveal.flash-shine .shimmer-name-text {
+            animation: nameBurstFlash 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+            filter: drop-shadow(0 0 16px rgba(232, 202, 140, 0.65));
+        }
+
+        @keyframes nameBurstFlash {
+            0% {
+                background-position: 125% 50%;
+                transform: scale(1);
+            }
+            45% {
+                background-position: 48% 50%;
+                transform: scale(1.028);
+            }
+            100% {
+                background-position: -25% 50%;
+                transform: scale(1);
+            }
+        }
+
+        /* =====================================================================
+           4. BULLETPROOF 4-FOLD PAMPHLET COVER OVERLAY (z-index: 5000)
+           ===================================================================== */
+        #pamphletOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background:
+                radial-gradient(circle at 50% 45%, rgba(252, 249, 242, 0.99) 0%, rgba(239, 232, 218, 0.98) 100%);
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            opacity: 1;
+            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow: hidden;
+        }
+
+        #pamphletOverlay.fade-out {
+            opacity: 0;
+            pointer-events: none !important;
+        }
+
+        .pamphlet-stage {
+            position: relative;
+            width: min(92vw, 418px);
+            height: min(84vh, 540px);
+            max-height: 540px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        #pamphletCard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 26px;
+            background: linear-gradient(160deg, #FCF9F2 0%, #F8F3E8 55%, #EFE7D6 100%);
+            border: 1.5px solid rgba(182, 145, 86, 0.72);
+            box-shadow:
+                0 32px 68px -16px rgba(18, 32, 62, 0.25),
+                0 10px 26px -6px rgba(182, 145, 86, 0.22),
+                inset 0 0 0 4px rgba(255, 253, 250, 0.85);
+            overflow: hidden;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #pamphletCard:active {
+            transform: scale(0.988);
+        }
+
+        .pamphlet-outer-border,
+        .pamphlet-inner-arch-svg,
+        .pamphlet-flaps-layer,
+        .p-flap,
+        .p-crease,
+        .pamphlet-inner-reveal,
+        .gold-pulse-ring,
+        .royal-card-frame-svg,
+        .card-watermark-svg {
+            pointer-events: none !important;
+        }
+
+        .pamphlet-outer-border {
+            position: absolute;
+            inset: 10px;
+            border-radius: 18px;
+            border: 1px solid rgba(182, 145, 86, 0.52);
+            box-shadow: inset 0 0 0 3px rgba(255, 253, 250, 0.65);
+            z-index: 30;
+        }
+
+        .pamphlet-inner-arch-svg {
+            position: absolute;
+            inset: 14px;
+            width: calc(100% - 28px);
+            height: calc(100% - 28px);
+            z-index: 28;
+            opacity: 0.78;
+            transition: opacity 0.35s ease;
+        }
+
+        #pamphletCard.is-opening .pamphlet-inner-arch-svg {
+            opacity: 0.22;
+        }
+
+        /* Inner Revealed Couple Names */
+        .pamphlet-inner-reveal {
+            position: absolute;
+            inset: 14px;
+            border-radius: 16px;
+            background:
+                radial-gradient(circle at 50% 42%, #FFFDFA 0%, #F6F0E4 100%);
+            border: 1px solid rgba(182, 145, 86, 0.48);
+            box-shadow: inset 0 0 28px rgba(182, 145, 86, 0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.2rem 0.9rem;
+            z-index: 8;
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #pamphletCard.is-opening .pamphlet-inner-reveal {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .inner-reveal-eyebrow {
+            font-family: var(--font-body-en);
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold-bronze);
+            margin-bottom: 0.15rem;
+        }
+
+        .inner-reveal-eyebrow-mr {
+            font-family: var(--font-body-mr);
+            font-size: 0.94rem;
+            font-weight: 500;
+            color: var(--navy-royal);
+            margin-bottom: 0.55rem;
+            line-height: 1.45;
+        }
+
+        .inner-reveal-names-en {
+            font-family: var(--font-display-en);
+            font-size: clamp(2rem, 6.6vw, 2.55rem);
+            font-weight: 600;
+            color: var(--navy-deep);
+            line-height: 1.08;
+        }
+
+        .inner-reveal-amp {
+            display: block;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.32rem;
+            color: var(--gold-antique);
+            margin: 0.02rem 0;
+        }
+
+        .inner-reveal-divider {
+            width: 72px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-antique), transparent);
+            margin: 0.58rem auto;
+        }
+
+        .inner-reveal-mr-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0px;
+            font-family: var(--font-display-mr);
+            font-feature-settings: "locl" 1;
+            overflow: visible !important;
+        }
+
+        .inner-mr-name {
+            display: inline-block;
+            font-family: var(--font-display-mr);
+            font-feature-settings: "locl" 1;
+            font-size: clamp(1.5rem, 5vw, 1.9rem);
+            font-weight: 600;
+            padding: 0.34em 0.35em 0.24em 0.25em;
+            line-height: 1.44;
+            overflow: visible !important;
+        }
+
+        .inner-mr-ani {
+            display: inline-block;
+            font-family: var(--font-display-mr);
+            font-feature-settings: "locl" 1;
+            font-size: clamp(1rem, 3.4vw, 1.2rem);
+            font-weight: 600;
+            color: var(--rose-muted);
+            padding: 0.22em 0.35em 0.18em 0.25em;
+            line-height: 1.42;
+            margin-top: -0.52em;
+            margin-bottom: -0.58em;
+            overflow: visible !important;
+        }
+
+        /* 4-Fold Paper Flaps & Crease Lines */
+        .pamphlet-flaps-layer {
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            overflow: hidden;
+            z-index: 15;
+        }
+
+        .p-flap {
+            position: absolute;
+            background: linear-gradient(155deg, #FCF9F2 0%, #F7F1E4 60%, #EFE6D3 100%);
+            transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.65s ease 0.12s;
+            will-change: transform, opacity;
+        }
+
+        .p-flap-left {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 50.5%;
+            border-right: 1px solid rgba(182, 145, 86, 0.34);
+            box-shadow: 4px 0 14px -6px rgba(18, 32, 62, 0.12);
+        }
+
+        .p-flap-right {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 50.5%;
+            border-left: 1px solid rgba(182, 145, 86, 0.34);
+            box-shadow: -4px 0 14px -6px rgba(18, 32, 62, 0.12);
+        }
+
+        .p-flap-top {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 45%;
+            clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+            background: linear-gradient(180deg, #FCF9F2 0%, #F2EBD9 100%);
+            filter: drop-shadow(0 5px 10px rgba(18, 32, 62, 0.1));
+        }
+
+        .p-flap-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 45%;
+            clip-path: polygon(0 28%, 50% 0, 100% 28%, 100% 100%, 0 100%);
+            background: linear-gradient(0deg, #FCF9F2 0%, #EFE7D6 100%);
+            filter: drop-shadow(0 -5px 10px rgba(18, 32, 62, 0.08));
+        }
+
+        .p-crease {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom right, transparent 49.7%, rgba(182, 145, 86, 0.28) 50%, transparent 50.3%),
+                linear-gradient(to top right, transparent 49.7%, rgba(182, 145, 86, 0.28) 50%, transparent 50.3%);
+            z-index: 16;
+            transition: opacity 0.45s ease;
+        }
+
+        #pamphletCard.is-opening .p-flap-top {
+            transform: translate3d(0, -108%, 0) scaleY(0.85);
+            opacity: 0;
+        }
+
+        #pamphletCard.is-opening .p-flap-bottom {
+            transform: translate3d(0, 108%, 0) scaleY(0.85);
+            opacity: 0;
+        }
+
+        #pamphletCard.is-opening .p-flap-left {
+            transform: translate3d(-108%, 0, 0) scaleX(0.85);
+            opacity: 0;
+        }
+
+        #pamphletCard.is-opening .p-flap-right {
+            transform: translate3d(108%, 0, 0) scaleX(0.85);
+            opacity: 0;
+        }
+
+        #pamphletCard.is-opening .p-crease {
+            opacity: 0;
+        }
+
+        .gold-pulse-ring {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 48px;
+            height: 48px;
+            margin-left: -24px;
+            margin-top: -24px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(182, 145, 86, 0.85);
+            background: radial-gradient(circle, rgba(239, 225, 196, 0.65) 0%, transparent 70%);
+            opacity: 0;
+            z-index: 22;
+        }
+
+        #pamphletCard.is-opening .gold-pulse-ring {
+            animation: goldRingExpand 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes goldRingExpand {
+            0% {
+                transform: scale(0.4);
+                opacity: 0.95;
+            }
+            100% {
+                transform: scale(10.5);
+                opacity: 0;
+            }
+        }
+
+        /* Front Cover Interactive Centerpiece */
+        #pamphletCenterpiece {
+            position: absolute;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 16px;
+            text-align: center;
+            pointer-events: auto !important;
+            touch-action: manipulation;
+            cursor: pointer;
+            transition: opacity 0.32s ease, transform 0.32s ease;
+        }
+
+        #pamphletCard.is-opening #pamphletCenterpiece {
+            opacity: 0;
+            transform: scale(0.92);
+            pointer-events: none !important;
+        }
+
+        .cover-title-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            pointer-events: none;
+        }
+
+        .cover-royal-crest {
+            color: var(--gold-antique);
+            margin-bottom: 2px;
+            opacity: 0.9;
+        }
+
+        .cover-title-en {
+            font-family: var(--font-display-en);
+            font-size: clamp(1.68rem, 5.4vw, 2.15rem);
+            font-weight: 600;
+            color: var(--navy-deep);
+       
